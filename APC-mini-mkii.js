@@ -42,7 +42,7 @@ function sendButtonColorBrightness(id, color, brightness)
 {
 	var note = buttonNotes[id[0]][id[1]];
 
-					// newColor[1] = Math.round((color[1] * intensity) / 255);
+	brightness = parseInt(brightness);
 	var r = Math.round(((color[0] * 255) * brightness) / 255);
 	var g = Math.round(((color[1] * 255) * brightness) / 255);
 	var b = Math.round(((color[2] * 255) * brightness) / 255);
@@ -274,7 +274,7 @@ function update(delta)
 	}
 
 	var time = util.getTime(); // time in seconds
-	var step = Math.round(((time % pulsingRate) / pulsingRate) * pulsingSteps);
+	var step = Math.floor(((time % pulsingRate) / pulsingRate) * pulsingSteps);
 
 	if (step !== previousStep)
 	{
