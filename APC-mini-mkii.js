@@ -33,8 +33,8 @@ var previousStep = -1;
 // ------ Feedback Functions ------
 
 function calcMSBLSB(value) {
-    var MSB = (value & 0xFF00) >> 8;
-    var LSB = value & 0x00FF;
+    var MSB = (value >> 7) & 0x7F;
+    var LSB = value & 0x7F;
     return [MSB, LSB];
 }
 
@@ -43,9 +43,9 @@ function sendButtonColorBrightness(id, color, brightness)
 	var note = buttonNotes[id[0]][id[1]];
 
 					// newColor[1] = Math.round((color[1] * intensity) / 255);
-	var r = Math.round(((color[0] * 127) * brightness) / 255);
-	var g = Math.round(((color[1] * 127) * brightness) / 255);
-	var b = Math.round(((color[2] * 127) * brightness) / 255);
+	var r = Math.round(((color[0] * 255) * brightness) / 255);
+	var g = Math.round(((color[1] * 255) * brightness) / 255);
+	var b = Math.round(((color[2] * 255) * brightness) / 255);
 
 	var rMSBLSB = calcMSBLSB(r);
 	var gMSBLSB = calcMSBLSB(g);
@@ -60,9 +60,9 @@ function sendButtonColorBrightness(id, color, brightness)
 function sendButtonColor(id, color)
 {
 	var note = buttonNotes[id[0]][id[1]];
-	var r = Math.round(color[0] * 127);
-	var g = Math.round(color[1] * 127);
-	var b = Math.round(color[2] * 127);
+	var r = Math.round(color[0] * 255);
+	var g = Math.round(color[1] * 255);
+	var b = Math.round(color[2] * 255);
 
 	var rMSBLSB = calcMSBLSB(r);
 	var gMSBLSB = calcMSBLSB(g);
